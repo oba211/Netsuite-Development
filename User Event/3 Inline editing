@@ -1,0 +1,31 @@
+Inline list editing enables you to update records quickly by changing data directly 
+in a record's row on the list page. This capability supports faster and easier editing 
+because you do not have to go into each record to edit it. You can also edit multiple 
+records simultaneously by using keyboard commands. Addresses cannot be edited on list 
+pages using inline editing.
+
+go to Setup > Company > Enable Features. On the Company subtab in the Data Management section, 
+check the Inline Editing box and click Save.
+
+Press Alt+X to edit the first editable field on the page.
+press tab to enter new rec
+Press Esc when you are done editing a field to save the new value and close the field.
+
+
+Xedit-
+            if (context.type === context.UserEventType.XEDIT) {
+                // Avoid doing anything on Inline Edit
+            }
+
+            Whenever any record is edited inline, whether from the UI or a Script using submitFields, NetSuite 
+            will trigger an xedit User Event for that record.
+
+            The only exception to this rule is when an Inline Edit is triggered by another User Event. Actions 
+            taken in User Event scripts will never trigger other User Event scripts.
+
+
+
+
+
+
+            
