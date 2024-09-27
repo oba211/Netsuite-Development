@@ -1,0 +1,6 @@
+When developing client scripts in NetSuite, it's important to keep performance in mind. One key consideration is that, 
+for performance reasons, only the first 10 deployed client scripts will execute. This limitation can lead to potential 
+functionality issues if you have multiple scripts deployed that are critical for your users.
+
+SuiteAns- https://suiteanswers.custhelp.com/app/answers/detail/a_id/103382/loc/en_US
+
