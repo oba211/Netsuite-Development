@@ -1,0 +1,34 @@
+Using Saved Searches for Efficient Parameter Management-
+
+Business Scenario:
+Imagine a company that needs to generate sales reports based on multiple customer segments. The marketing department frequently 
+requests data for various segments, such as "High Value Customers," "New Customers," and "Inactive Customers." Traditionally, 
+the development team might have created multiple parameters in scripts to handle these different segments, leading to complex 
+code that is difficult to maintain and update.
+
+Proposed Solution:
+Instead of hard-coding values in script or creating multiple script parameters for each customer , the development 
+team can create a saved search that encompasses all relevant criteria. This saved search can be configured to filter 
+customers based on various attributes (e.g., purchase history, activity status, etc.).
+
+Benefits of Using a Saved Search:
+
+Simplicity and Clarity: By using a single saved search, the script can remain clean and straightforward. The script only needs 
+to reference the saved search instead of managing multiple parameters, which enhances readability.
+
+Flexibility: If the marketing team requires a new segment in the future, they can simply update the saved search criteria 
+without needing to alter the underlying script. This allows for quicker adjustments to business needs.
+
+Reduced Redundancy: Having one saved search reduces duplication of logic across multiple scripts. Instead of writing similar 
+filtering logic in various places, the script can leverage the saved search, promoting reusability.
+
+Easier Maintenance: With fewer hard-coded values and parameters, the codebase becomes easier to maintain. Updates are centralized 
+within the saved search, minimizing the risk of introducing bugs across multiple scripts.
+
+Performance Optimization: Saved searches are optimized for performance within NetSuite, which can lead to improved execution 
+times compared to dynamic queries in scripts.
+
+Implementation:
+The development team would create a saved search named "Customer Segmentation" with parameters for filtering the desired customer 
+segments. In the SuiteScript, they would reference this saved search, passing the necessary context to retrieve the required data 
+without needing multiple parameters.
