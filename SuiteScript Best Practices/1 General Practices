@@ -1,1 +1,150 @@
 
+A. Code Organization-
+
+Modular Design: Structure your code into reusable components. Ensure that related data and operations are grouped 
+logically within functions or classes. By creating a common library for reusable functions, you can easily call them
+in specific event handlers as needed.
+
+Small and Readable Functions: Aim for concise, readable functions. Functions that are too lengthy can be challenging to 
+understand and debug. If necessary, refactor your code to maintain manageable function sizes.
+
+Manage Nesting: Use nesting sparingly. Excessive nesting can lead to scripts that are hard to read. Strive to keep your 
+code as clear and straightforward as possible.
+
+
+B. Using SuiteScript modules-
+
+When specifying the modules your script uses, ensure that the order of the modules aligns with the order of parameters 
+in your main function. For instance, if your script utilizes the N/error, N/record, and N/file modules in that sequence, 
+your function parameters should be arranged accordingly
+
+
+C. URL Management-
+
+Avoid hard-coding URL links in your scripts. Hard-coded URLs can break if the domain name changes, leading to potential issues. 
+Instead, utilize the N/url module to dynamically construct URLs. This approach ensures that your links remain functional and 
+adaptable to changes.
+
+D. Use Script Parameters-
+
+To enhance the configurability of your scripts, avoid hard-coding values. Instead, use script parameters or configuration files. 
+This practice allows for easier adjustments without modifying the code itself.
+You can reference script parameters using the runtime.getCurrentScript() function from the N/runtime
+
+E. Logging Best Practices-
+
+Meaningful Log Messages: Log messages should be clear and relevant, including key details like record ID and type. This provides 
+context on the script’s functionality.
+
+Log Levels:
+Testing: Set Log Level to Debug for detailed information.
+Production: Use Audit to reduce log volume.
+Temporarily switch back to Debug for diagnosing production issues if necessary.
+
+F. Record loading-
+
+Dynamic Mode for Create/Edit: Use dynamic mode (record.load(options)) when creating or editing records. This allows you to make updates
+to the record object.
+Non-Dynamic Mode for Field Retrieval: If you only need to retrieve field values without updating the record, consider loading 
+in non-dynamic mode.
+
+Optimize for Performance: Avoid using record.load(options) to load entire records when you only need a few fields. This method loads 
+all configuration fields and sublists, similar to the UI, which can slow down script execution.
+
+Use search.lookupFields(options): For retrieving specific field values efficiently, use search.lookupFields(options). 
+This method is faster and avoids unnecessary overhead.
+
+Instead of loading a record.load just to make a few updates, consider using record.submitFields(options). This method allows you to update 
+specific fields without the need to load and save the entire record, improving performance.
+
+If applicable, change the trigger of a script to avoid reloading a record.
+
+Avoid saving records multiple times in an After Record Submit event.
+
+Avoid loading and submitting a record on a Before Record Submit trigger.
+
+Minimize API calls that perform load, search, or save record operations.
+
+
+G. Naming Conventions -
+
+Code Structure-
+Use descriptive names for functions, variables, and IDs to create a clear structure for comments and documentation.
+
+Functions-
+ Write all function names in lower camel case (e.g., `myFunctionName`).
+
+IDs-
+- Use lower case for all record, field, sublist, tab, and subtab IDs. 
+- Prefix all custom script IDs and deployment IDs with an underscore (_).
+
+Variables and Constants-
+Avoid Single Characters: Don’t use single-character variable names.
+Descriptive Naming: Name variables to indicate their type and purpose:
+String: Prefix with st (e.g., stTitle)
+Integer: Prefix with int (e.g., intTotalCount)
+Float: Prefix with fl (e.g., flPrice)
+Boolean: Prefix with b (e.g., bIsDone)
+Array: Prefix with arr (e.g., arrPhoneCalls)
+Object: Prefix with Obj (e.g., ObjNewPet)
+Record: Prefix with rec (e.g., recCustomer)
+Date: Prefix with dt (e.g., dtFirstBillingDate)
+
+Variable Scope-
+Local Variables: Use standard camelCase (e.g., localVariable).
+Global Variables: Use upper case with underscores (e.g., GLOBAL_VARIABLE).
+Pseudo Constants: Use upper case with underscores for constants to improve code readability.
+
+File Naming-
+When writing SuiteScript code for multiple accounts, use the following format: 
+ 
+  <Company Name/Abbreviation>_<Script Type>_<Requirement Description>.js
+  
+  example: `companyName_CS_SetTaxable.js`.
+
+Suggested Script Types Naming-
+CS: Client Scripts
+UE: User Events
+SL: Suitelet
+RL: RESTlet
+PL: Portlet
+SC: Scheduled
+MR: Map/Reduce
+GL: SuiteGL
+WA: Workflow Action
+MU: Mass Update
+
+H.Code Execution and Maintenance Best Practices-
+
+Conditional Execution: Execute blocks of code only when specific conditions are met. This improves efficiency and clarity.
+
+Eliminate Redundancies: Remove redundant operations, unused lines of code, and duplicate logic that may have already been handled 
+by other events.
+
+Combine Similar Scripts/Functions: Whenever possible, consolidate similar scripts or functions to reduce complexity and 
+enhance maintainability.
+
+Inactivate Unused Scripts: Identify and inactivate scripts or deployments that are no longer needed to keep the environment 
+clean and manageable.
+
+Asynchronous Processing: Use asynchronous processing for user events to improve performance and responsiveness.
+
+As a general rule, design your user event scripts to execute in under 5 seconds, your Suitelets and Portlets to execute in 
+under 10 seconds, and your scheduled scripts in under 5 minutes. This gives you a large enough margin of error to handle 
+the outlier use cases
+
+I . Scripting Searches-
+Optimize search filters and columns. Make your search results faster by:
+
+Filtering inactive records.
+Entering shorter date range criteria.
+Using faster operators such as starts with/between/within instead of contains/formulas.
+Removing unnecessary columns.
+
+Remove search results columns that are not used by a script. Place any lines that add columns to search results in a comment. 
+Then the returned values are not used by the succeeding script logic.
+
+Combine searches of the same record type by using merged filters. Wherever possible, combine searches for the same record into 
+one main search with merged filters. This improves performance by minimizing search instances.
+
+
